@@ -1,6 +1,6 @@
 import requests
 
-url = "https://api.telegram.org/bot73349262:AAGQEevFjZmiF0tWyPJPwGP3A_7DjdzyhmY/"
+url = "https://api.telegram.org/bot873349262:AAGQEevFjZmiF0tWyPJPwGP3A_7DjdzyhmY/"
 
 def get_updates_json(request):
     response = requests.get(request + 'getUpdates')
@@ -11,6 +11,15 @@ def last_update(data):
     total_updates = len(results) - 1
     return results[total_updates]
 
+def get_chat_id(update):
+    chat_id = update['message']['chat']['id']
+    return chat_id
 
-response = requests.get('https://api.telegram.org/bot73349262:AAGQEevFjZmiF0tWyPJPwGP3A_7DjdzyhmY/getUpdates')
+def send_mess(chat, text):
+    params = {'chat_id': chat, 'text': text}
+    response = requests.post(url + 'sendMessage', data=params)
+    return response
+
+#Test some functions
+response = get_updates_json(url)
 print(response)
